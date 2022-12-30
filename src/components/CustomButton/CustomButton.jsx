@@ -2,7 +2,7 @@ import React from "react";
 import { COLORS } from "../../constants/colors";
 import { ICONS } from "../../constants/icons";
 import { BUTTON_TEXT } from "../../constants/strings";
-import { Button, Icon, Span } from "../Default/Defaults";
+import { Button, Icon, LoaderIcon, Span } from "../Default/Defaults";
 
 const CustomButton = ({
   text = BUTTON_TEXT.DEFAULT,
@@ -19,6 +19,7 @@ const CustomButton = ({
   paddingVertical = 13,
   paddingHorizontal = 32,
   border = null,
+  borderRadius = 0,
 }) => {
   const buttonStyle = {
     display: "flex",
@@ -31,7 +32,7 @@ const CustomButton = ({
     paddingBottom: paddingVertical,
     paddingLeft: paddingHorizontal,
     paddingRight: paddingHorizontal,
-    borderRadius: "100px",
+    borderRadius: borderRadius ? borderRadius : 100,
     border: border ? border : "none",
     fontWeight: 600,
     fontSize: fontSize ? fontSize : "16px",
@@ -50,12 +51,15 @@ const CustomButton = ({
   }
 
   return (
-    <Button style={buttonStyle} onClick={disabled ? "" : onClick}>
+    <Button style={buttonStyle} onClick={disabled ? () => {} : onClick}>
       {isLoading ? (
-        <Icon
+        <LoaderIcon
           className={ICONS.LOADING}
-          style={{ fontSize: buttonStyle.fontSize, color: buttonStyle.color }}
-        ></Icon>
+          style={{
+            fontSize: buttonStyle.fontSize,
+            color: buttonStyle.color,
+          }}
+        ></LoaderIcon>
       ) : (
         <Span
           className={text}

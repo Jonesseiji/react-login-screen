@@ -1,4 +1,13 @@
 export const BUTTON_TEXT = {
-  DEFAULT: "Digite seu texto",
-  LOGIN: "Entrar",
+  DEFAULT: "Type your text",
+  LOGIN: "Log in",
+};
+
+export const STATUS = {
+  SUCCESS: "Successful login",
+  FAILED: {
+    EMAIL: "Incorrect email. Please try again",
+    PASSWORD: "Incorrect password. Please try again",
+    DEFAULT: "Something went wrong. Please try again later",
+  },
 };

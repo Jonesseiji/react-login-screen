@@ -1,6 +1,10 @@
+import styled from "styled-components";
 import { COLORS } from "../../constants/colors";
+import { INPUT } from "../../constants/input";
 import Column from "../Column/Column";
-import { Input, Label } from "../Default/Defaults";
+import { Icon, Image, Input, Label } from "../Default/Defaults";
+import Row from "../Row/Row";
+import { ICONS } from "../../constants/icons";
 
 const CustomInput = ({
   onChange = {},
@@ -25,6 +29,8 @@ const CustomInput = ({
   maxWidth = 0 || "",
   labelTextAlign = "",
   rows = 3,
+  onClick = {},
+  rowWidth = 0,
 }) => {
   const Styles = {
     Input: {
@@ -34,6 +40,7 @@ const CustomInput = ({
       color: inputColor ? inputColor : COLORS.GRAY_VARIANT_1,
       fontSize: inputFontSize ? inputFontSize : 16,
       fontWeight: inputFontWeight ? inputFontWeight : 500,
+      width: width ? width : "100%",
     },
     Label: {
       color: labelColor ? labelColor : COLORS.DEFAULT_DARK,
@@ -52,27 +59,19 @@ const CustomInput = ({
       marginTop={marginTop}
       width={width ? width : "100%"}
       maxWidth={maxWidth ? maxWidth : "100%"}
+      position="relative"
     >
       {label?.length >= 1 && <Label style={Styles.Label}>{label}</Label>}
-      {type === "textarea" ? (
-        <textarea
-          style={Styles.Input}
-          rows={rows}
-          value={value}
-          onChange={onChange}
-        ></textarea>
-      ) : (
-        <Input
-          type={type}
-          placeholder={placeholder}
-          style={Styles.Input}
-          name={name}
-          value={value}
-          onChange={onChange}
-        />
-      )}
+
+      <Input
+        type={type}
+        placeholder={placeholder}
+        style={Styles.Input}
+        name={name}
+        value={value}
+        onChange={onChange}
+      />
     </Column>
   );
 };
-
 export default CustomInput;

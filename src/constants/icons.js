@@ -13,4 +13,6 @@ export const ICONS = {
     PLAY: "fa fa-play",
     PLAY_PAUSE: "fa fa-play-pause",
     PAUSE: "fa fa-pause",
+    SHOW: "fa fa-solid fa-eye",
+    HIDE: "fa fa-eye-slash"
   };
