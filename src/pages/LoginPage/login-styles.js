@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS, GRADIENT_COLORS } from "../../constants/colors";
 import Column from "../../components/Column/Column";
-import { Span } from "../../components/Default/Defaults";
+import { Label, Span } from "../../components/Default/Defaults";
 
 export const Background = styled.div`
   display: flex;
@@ -12,6 +12,12 @@ export const Background = styled.div`
   height: 100%;
   position: absolute;
   z-index: 2;
+`;
+
+export const LoginLabel = styled(Label)`
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 36px;
 `;
 
 export const Overlay = styled.div`
@@ -32,7 +38,7 @@ export const BackgroundForm = styled.div`
   width: 100%;
   max-width: 400px;
   height: 100%;
-  max-height: 400px;
+  max-height: 450px;
   border-radius: 8px;
 `;
 
@@ -66,7 +72,6 @@ export const SuccessMessage = styled(Span)`
   justify-content: center;
   align-items: center;
 `;
-
 
 export const ShowPasswordArea = styled.span`
   display: flex;

@@ -7,12 +7,13 @@ import {
   ContainedForm,
   ErrorMessage,
   InputArea,
+  LoginLabel,
   Overlay,
   ShowPasswordArea,
   SuccessMessage,
 } from "./login-styles";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import { BUTTON_TEXT, STATUS } from "../../constants/strings";
+import { BUTTON_TEXT, DEFAULTS, STATUS } from "../../constants/strings";
 import { FAKE } from "../../constants/fake-user";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
@@ -22,6 +23,8 @@ import styled from "styled-components";
 import { COLORS } from "../../constants/colors";
 import { Icon, Image } from "../../components/Default/Defaults";
 import Row from "../../components/Row/Row";
+import { validatePassword } from "../../helpers/validatePassword";
+import { validateEmail } from "../../helpers/validateEmail";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -35,9 +38,22 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const signIn = () => {
+  const signIn = async () => {
     setIsLoading(true);
-    setTimeout(() => {
+
+    await setTimeout(() => {
+      const checkEmailFormat = validateEmail(email);
+      const checkPasswordFormat = validatePassword(password);
+      if (!checkEmailFormat) {
+        setFailed(true);
+        setIsLoading(false);
+        return setErrorMessage(STATUS.FAILED.EMAIL_FORMAT);
+      }
+      if (!checkPasswordFormat) {
+        setFailed(true);
+        setIsLoading(false);
+        return setErrorMessage(STATUS.FAILED.PASSWORD_FORMAT);
+      }
       if (email !== FAKE.EMAIL) {
         setFailed(true);
         setIsLoading(false);
@@ -50,7 +66,8 @@ const LoginPage = () => {
       }
       setFailed(false);
       setIsLoading(false);
-      return setSuccess(true);
+      setSuccess(true);
+      return navigate(ROUTES.HOME);
     }, 3000);
   };
 
@@ -74,6 +91,7 @@ const LoginPage = () => {
       <Overlay />
       <BackgroundForm>
         <ContainedForm>
+          <LoginLabel>{DEFAULTS.LOGIN.LOGIN}</LoginLabel>
           <InputArea>
             <CustomInput
               type={INPUT.TYPE.EMAIL}
